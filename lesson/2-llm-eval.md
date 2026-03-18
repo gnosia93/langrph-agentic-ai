@@ -19,8 +19,10 @@ import sys
   --model_args pretrained=Qwen/Qwen3.5-27B,dtype=bfloat16 \
   --tasks mmlu,arc_challenge,gsm8k,hellaswag,lambada_openai,winogrande,truthfulqa_mc2,openbookqa,toxigen,bbq \
   --batch_size 4 \
+  --limit 100 \
   --output_path ./eval_results/
 ```
+
 #### 5가지 평가영역 ####
 
 | 영역 | 벤치마크 1 | 설명 | 벤치마크 2 | 설명 |
