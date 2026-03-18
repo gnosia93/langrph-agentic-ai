@@ -17,12 +17,17 @@ from trl import SFTTrainer
 # ============================================================
 model_name = "Qwen/Qwen3.5-27B"
 
+# 4bit 양자화
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
     bnb_4bit_compute_dtype=torch.bfloat16,
     bnb_4bit_use_double_quant=True,
-#   load_in_8bit=True               ← 8 비트인 경우 이것만
+)
+
+# 8bit 양자화
+bnb_config = BitsAndBytesConfig(
+    load_in_8bit=True,
 )
 
 model = AutoModelForCausalLM.from_pretrained(
