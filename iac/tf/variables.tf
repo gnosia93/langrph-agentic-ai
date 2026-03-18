@@ -29,7 +29,10 @@ variable "key_name" {
 }
 
 variable "vscode_password" {
-  default     = "code!@#c"
+  description = "VS Code Server password"
+  type        = string
+  sensitive   = true
+  # default 없음 → apply 시 입력 프롬프트 뜸
 }
 
 # 공인 IP 확인
