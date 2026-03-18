@@ -1,4 +1,4 @@
-### Foundation 모델 ###
+## Foundation 모델 ##
 * https://huggingface.co/Qwen/Qwen3.5-27B
 ```
 Qwen3.5 (2026년 2월):
@@ -9,7 +9,7 @@ Qwen3.5 (2026년 2월):
   - 201개 언어
 ```
 
-### PPL ###
+## PPL ##
 파인튜닝 이전에 "DevOps/머신러닝" 도메인에 대한 모델의 이해도를 측정한다. 
 PPL(Perplexity)은 모델이 주어진 텍스트를 얼마나 "당연하게" 예측하는지를 측정하는 지표로, 수학적으로는 모델이 다음 토큰을 예측할 때의 평균 불확실성이다.
 ```
@@ -42,5 +42,5 @@ PPL 값이 낮을수록 좋다.
 * https://github.com/gnosia93/agentic-ai-eks/blob/main/code/qwen_ppl.py 
 
 
-### 파인튜닝 ###
+## 파인튜닝 ##
 * https://github.com/gnosia93/agentic-ai-eks/blob/main/code/qwen_finetune.py
