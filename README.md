@@ -1,4 +1,4 @@
-## 개발 ##
+### Developement ###
 
 * [1. 환경설정하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/1.start.md)
 
@@ -14,9 +14,7 @@
 
 
 
-
-
-## DevOPS ##
+### DevOPS ###
 
 * [1. EKS 생성하기](https://github.com/gnosia93/infer-on-eks/blob/main/lesson/1-create-eks.md)
 
