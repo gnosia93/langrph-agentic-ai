@@ -7,7 +7,7 @@
 문서 수집 → (레이아웃) 파싱 → 청킹 → 임베딩 → 벡터DB 저장 → 검색 → 리랭킹 → LLM 생성
 ```
 
-#### 저장 ####
+#### 저장 샘플 ####
 ```
 from langchain_community.document_loaders import GitHubLoader, WebBaseLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -30,7 +30,7 @@ vectordb = Chroma.from_documents(chunks, embeddings, persist_directory="./devops
 * Chroma는 기본적으로 로컬 임베디드 DB로, SQLite처럼 별도 서버 없이 파일 기반으로 동작한다.
 
 
-#### 검색 ####
+#### 검색 샘플 ####
 ```
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
