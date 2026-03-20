@@ -1,4 +1,4 @@
-# finetune_qwen.py
+# qwen_finetune_inst.py
 # Qwen2.5-7B-Instruct QLoRA 파인튜닝 예제
 
 import torch
