@@ -6,7 +6,7 @@
 
 * [3. 파인튜닝하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/3-finetune.md)
 
-* [4. RAG 설계](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/4-rag.md)
+* [4. RAG 파이프라인 설계](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/4-rag.md)
 
 * [5. Agentic AI 구현하기]
    - LangGraph로 에이전트 구성
