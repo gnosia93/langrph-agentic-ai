@@ -15,11 +15,6 @@
 
 * [6. 가드레일 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/6.guard-rail.md)
 
-* [7. 모니터링 구성하기]
-   - Prometheus + Grafana
-   - 응답 시간, 토큰 사용량, 검색 품질 메트릭
-   - LLM-as-Judge 비동기 평가
-
 * [8. 평가 파이프라인 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/8.eval-framework.md)
 
 * [9. 로컬 Docker 배포하기]
