@@ -15,7 +15,15 @@ start_http_server(8000)
 
 # 학습 루프에서 메트릭 업데이트
 for step in range(total_steps):
-    loss = train_one_step()
+    start = time.time()
+    loss = train_one_step(batch)
+    elapsed = time.time() - start
+    
+    # 배치 내 총 토큰 수
+    tokens_in_batch = batch_size * sequence_length 
+    # tokens/sec 계산
+    tokens_per_sec = tokens_in_batch / elapsed  # 예: 131072 / 0.085 = 1,541,906
+    
     TRAINING_LOSS.set(loss)
     TRAINING_STEP.inc()
     THROUGHPUT.set(tokens_per_sec)
