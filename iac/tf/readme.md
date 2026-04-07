@@ -6,7 +6,7 @@ brew install hashicorp/tap/terraform
 ```
 
 ### EKS 설치 ###
-karpenter helm 공식 차트가 aws ecr 에 있기 때문에 ecr 로 먼저 로그인 한 후 설치한다.
+karpenter helm 차트가 aws ecr 에 있기 때문에 ecr 로 먼저 로그인 한 후 설치한다.
 ```
 git clone https://github.com/gnosia93/eks-agentic-ai.git
 cd eks-agentic-ai/iac/tf
