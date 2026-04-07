@@ -59,8 +59,8 @@ spec:
       volumes:
         - name: shm
           emptyDir:
-            medium: Memory                         # AWS 는 G 인스턴스 타입의 PCI 통신을 보안상으로 막아 놓았기 때문에 SHM 메모리 통신으로 fallback 된다. 그러므로 shared memory 사이즈를 좀 크게 잡아준다.
-            sizeLimit: 16Gi                        # 통신 토폴로지 정보 (어떤 GPU가 어떤 경로로 연결됐는지), 동기화 플래그 (all-reduce 시작/완료 신호), 임시 버퍼 (작은 메시지 전달)
+            medium: Memory                        # AWS 는 G 인스턴스 타입의 PCI 통신을 보안상으로 막아 놓았기 때문에 SHM 메모리 통신으로 fallback 된다. 그러므로 shared memory 사이즈를 좀 크게 잡아준다.
+            sizeLimit: 16Gi                       # 통신 토폴로지 정보 (어떤 GPU가 어떤 경로로 연결됐는지), 동기화 플래그 (all-reduce 시작/완료 신호), 임시 버퍼 (작은 메시지 전달)
         - name: model-cache
           emptyDir: {}          # 프로덕션에서는 PVC 또는 S3 마운트 권장
 ---
