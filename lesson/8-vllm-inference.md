@@ -9,9 +9,9 @@ g6e.12xlarge 인스턴스는 2대가 필요하다.
 kubectl -f https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/yaml/vllm-deployment.yaml
 ```
 * vLLM 파라미터 
-  * --model                     어떤 모델 쓸지
-  * --tensor-parallel-size      GPU 몇 장에 나눌지
+  * --model                     사용모델
+  * --tensor-parallel-size      GPU 갯수
   * --max-model-len             최대 시퀀스 길이
-  * --gpu-memory-utilization    GPU 메모리 몇 % 쓸지
+  * --gpu-memory-utilization    GPU 메모리 상용률(90% 권장) - CUDA 커널 실행 오버헤드, Activation 임시 버퍼, Tensor 연산 중간 결과물, NCCL 통신 버퍼 (TP 사용시)
 
 
