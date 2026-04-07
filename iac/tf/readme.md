@@ -13,9 +13,10 @@ cd eks-agentic-ai/iac/tf
 terraform init
 terraform apply --auto-approve
 ```
-> ![TIP]
-> ..
-> ..
+> [!NOTE]
+> 클러스터 삭제: 
+> terraform destroy --auto-approve
+>
 
 ### 클러스터 등록 ###
 
@@ -33,10 +34,6 @@ aws eks update-kubeconfig --name ${CLUSTER_NAME}
 ```
 
 
-### EKS 삭제 ###
-워크샵과 관련된 리소스를 모두 삭제한다.
-```
-terraform destroy --auto-approve
-```
+
 
 
