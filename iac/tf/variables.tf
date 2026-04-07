@@ -32,6 +32,7 @@ variable "vscode_password" {
   description = "VS Code Server password"
   type        = string
   sensitive   = false
+  default     = "code!@#$"
   # default 없음 → apply 시 입력 프롬프트 뜸
 }
 
