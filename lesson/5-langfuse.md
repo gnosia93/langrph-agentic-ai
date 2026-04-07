@@ -21,7 +21,7 @@ langfuse_handler = CallbackHandler()  # 자동으로 환경변수 읽음
 방법 1: 콜백 직접 전달 (수동)
 llm.invoke(input, config={"callbacks": [langfuse_handler]})
 
-방법 2: 데코레이터 사용 (자동, 추천!)
+방법 2: 데코레이터 사용 (자동)
 @observe()
 def my_function():
     llm.invoke(input)  # 자동으로 추적됨
