@@ -10,7 +10,7 @@
 
 * [L5. RAG 파이프라인 설계](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/4-rag.md)
 
-* [L6. Agentic AI]
+* L6. Agentic AI
    - [LangGraph로 RAG 구현](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/5-langgraph-rag.md)
    - [@tool 콜링](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/5-tool-calling.md)
    - [LangFuse 사용하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-langfuse.md)
