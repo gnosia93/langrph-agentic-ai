@@ -9,25 +9,53 @@
 
 #### 저장 샘플 코드 ####
 ```
-from langchain_community.document_loaders import GitHubLoader, WebBaseLoader
+1. Milvus 로컬 실행 (Docker Compose)
+curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
+bash standalone_embed.sh start
+이러면 localhost:19530에 Milvus가 뜹니다.
+
+2. 패키지 설치
+pip install langchain langchain-community GitPython sentence-transformers pymilvus
+```
+
+```
+# test_rag.py
+from langchain_community.document_loaders import GithubFileLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
-
-# 1. GitHub에서 마크다운 수집
-loader = GitHubLoader(repo="aws/aws-parallelcluster", file_filter=lambda f: f.endswith(".md"))
-docs = loader.load()
-
-# 2. 청킹
+from langchain_community.vectorstores import Milvus
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+# 1. GitHub에서 마크다운 수집
+loader = GithubFileLoader(
+    repo="aws/aws-parallelcluster",
+    access_token="",
+    github_api_url="https://api.github.com",
+    file_filter=lambda f: f.path.endswith(".md"),
+)
+docs = loader.load()
+print(f"문서 수: {len(docs)}")
+
+# 2. 청킹
 splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 chunks = splitter.split_documents(docs)
+print(f"청크 수: {len(chunks)}")
 
-# 3. 임베딩 + 벡터DB 저장
+# 3. 임베딩 + Milvus 저장
 embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-base-en-v1.5")
-vectordb = Chroma.from_documents(chunks, embeddings, persist_directory="./devops_vectordb")
+vectordb = Milvus.from_documents(
+    chunks,
+    embeddings,
+    connection_args={"host": "localhost", "port": "19530"},
+    collection_name="devops_docs",
+)
+print("Milvus 저장 완료")
+
+# 4. 테스트 검색
+results = vectordb.similarity_search("how to install parallelcluster", k=3)
+for r in results:
+    print(r.page_content[:200])
+    print("---")
 ```
-* Chroma는 기본적으로 로컬 임베디드 DB로, SQLite처럼 별도 서버 없이 파일 기반으로 동작한다.
 
 
 #### 검색 샘플 코드 ####
