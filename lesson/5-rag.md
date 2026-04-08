@@ -69,15 +69,19 @@ bash standalone_embed.sh stop
 #### 검색 샘플 코드 ####
 ```
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import Milvus
 from sentence_transformers import CrossEncoder
 
-# 벡터DB 로드
-embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-base-en-v1.5")
-vectordb = Chroma(persist_directory="./devops_vectordb", embedding_function=embeddings)
+# 벡터DB 로드 (Milvus + 다국어 임베딩)
+embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-m3")
+vectordb = Milvus(
+    embedding_function=embeddings,
+    connection_args={"host": "localhost", "port": "19530"},
+    collection_name="devops_docs",
+)
 
-# 리랭커 로드
-reranker = CrossEncoder("BAAI/bge-reranker-base")
+# 리랭커 로드 (다국어 지원 리랭커)
+reranker = CrossEncoder("BAAI/bge-reranker-v2-m3")
 
 # 1단계: 벡터 검색 (후보 10개)
 query = "GPU OOM 해결 방법은?"
