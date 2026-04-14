@@ -36,6 +36,7 @@ KV Cache ≈ 2 × num_layers × hidden_dim × seq_len × batch_size × bytes
 = 70 / 64
 = 1.09 → H100 1장으로 가능 (KV cache 여유 적음)
 ```
+![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/gpu-memory-structure.png)
 
 ### GPU별 매칭 가이드 (예시) ###
 ```
@@ -48,3 +49,4 @@ A100 (80GB)      80GB      30B           55B
 H100 (80GB)      80GB      30B           55B
 H200 (141GB)     141GB     55B           70B
 ```
+
