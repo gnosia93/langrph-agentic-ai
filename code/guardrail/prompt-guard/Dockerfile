@@ -6,6 +6,10 @@ COPY app.py .
 RUN pip install --no-cache-dir \
     fastapi uvicorn transformers torch --index-url https://download.pytorch.org/whl/cpu
 
+# 빌드 시 토큰 받기
+ARG HF_TOKEN
+ENV HF_TOKEN=${HF_TOKEN}
+
 # 모델을 빌드 시 미리 다운로드
 RUN python -c "from transformers import AutoTokenizer, AutoModelForSequenceClassification; \
     AutoTokenizer.from_pretrained('meta-llama/Prompt-Guard-86M'); \
