@@ -104,6 +104,18 @@ Llama Guard 3는 8B 모델이라 A10G(24GB) 하나면 충분하므로, 메인 LL
 ```
 kubectl create secret generic hf-secret --from-literal=token=hf_xxxxx
 ```
+* 테스트 하기 
 ```
+import httpx
 
+async def is_safe(text: str) -> bool:
+    resp = await httpx.AsyncClient().post(
+        "http://prompt-guard/classify",
+        json={"text": text}
+    )
+    return resp.json()["is_safe"]
+
+# 사용
+if not await is_safe(user_input):
+    return "해당 요청은 처리할 수 없습니다."
 ```
