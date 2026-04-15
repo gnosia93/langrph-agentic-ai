@@ -103,7 +103,7 @@ Llama Guard 3는 8B 모델이라 A10G(24GB) 하나면 충분하므로, 메인 LL
 ### 1. Prompt Guard ###
 ```
 curl -o Dockerfile https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/guardrail/prompt-guard/Dockerfile
-curl -o
+curl -o app.py https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/guardrail/prompt-guard/app.py
 
 
 kubectl create secret generic hf-secret --from-literal=token=hf_xxxxx
