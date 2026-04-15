@@ -87,6 +87,19 @@ vllm serve ./my-model \
 
 1. Golden Dataset (필수):
 ```
+from sentence_transformers import SentenceTransformer, util
+
+# 임베딩 모델
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+def similarity(text1: str, text2: str) -> float:
+    """두 텍스트 유사도 (0-1)"""
+    emb1 = model.encode(text1)
+    emb2 = model.encode(text2)
+    
+    score = util.cos_sim(emb1, emb2).item()
+    return score
+
 # 파인튜닝 전에 미리 준비
 golden_test = [
     {"input": "환불 방법은?", "expected": "고객센터 1234..."},
