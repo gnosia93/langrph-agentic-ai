@@ -65,6 +65,14 @@ helm version
 curl --silent --location "https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_${ARCH}.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/k9s /usr/local/bin/
 k9s version
+```
+```
+wget https://go.dev/dl/go1.24.4.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.24.4.linux-amd64.tar.gz
+echo 'export PATH=/usr/local/go/bin:$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
+source ~/.bashrc
+go version
 
 sudo apt update -y
 sudo apt install -y golang
