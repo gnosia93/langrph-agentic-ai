@@ -36,6 +36,7 @@
    - 깃랩으로 통합하기
      
 * L10. LLM 배포하기
+   - [인퍼런스용 GPU 선정하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a8-model-fit-gpu.md)
    - [vLLM 인퍼런스 (Qwen2.5-72B)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/10-vllm-inference.md)  
    - [TensorRT-LLM 인퍼런스](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/10-tensorrt-inference.md)
    - [KEDA 기반 오토 스케일링](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/10-keda-autoscaling.md)
@@ -54,7 +55,6 @@
 * [K8S 컨트롤 플레인](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a4-k8s-controlplan.md)
 * [Harness Engineering](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a5.harness-eng.md)
 * [promptfoo 로 모델 평가하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a7.promptfoo.md)
-* [인퍼런스용 GPU 선정하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a8-model-fit-gpu.md)
 
      
 
