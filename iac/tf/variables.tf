@@ -27,7 +27,6 @@ variable "system_node_instance_types" {
   default = ["c7g.xlarge"]
 }
 
-
 variable "key_name" {
   description = "AWS SSH Key Pair name for EC2 access"
   type        = string
