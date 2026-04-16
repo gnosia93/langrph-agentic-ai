@@ -146,7 +146,7 @@ resource "aws_security_group" "instance_sg" {
     cidr_blocks = local.allowed_ip_cidrs
   }
 
-  # VS Code Server (Code Server) 접속 허용
+  # Jupyter 접속 허용
   ingress {
     from_port   = 8080
     to_port     = 8080
