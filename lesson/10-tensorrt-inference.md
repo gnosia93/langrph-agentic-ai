@@ -7,6 +7,11 @@ TensorRT은 커널 퓨전, 메모리 레이아웃 최적화, 패딩 최적화를
 ![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/tensorrt-optimization.png)
 
 
+### Triton Server vs TensorRT-LLM ###
+Triton Server는 서빙 인프라로 HTTP/gRPC 엔드포인트를 제공하고, 요청 큐잉과 배칭을 처리하며, 여러 모델을 하나의 서버에서 동시에 서빙할 수 있다. 모델 버전 관리(v1 → v2 전환), 헬스체크, Prometheus 메트릭 수집, 모델 로드/언로드 기능을 제공한다.
+
+TensorRT-LLM은 추론 엔진으로 모델을 TensorRT 엔진으로 컴파일(빌드)하고, GPU에서 최적화된 커널로 추론을 실행한다. KV Cache 관리, Tensor Parallel 처리, 그리고 vLLM의 Continuous Batching과 유사한 In-flight Batching을 지원한다.
+
 ## TensorRT-LLM 에 모델 배포하기 ##
 
 S3 버킷을 생성하고 테라폼에서 생성한 eks-agentic-ai-s3-access 을 쿠버네티스의 서비스 어카운트에 할당한다
