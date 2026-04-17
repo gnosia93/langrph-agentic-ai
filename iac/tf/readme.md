@@ -31,13 +31,6 @@ export CLUSTER_NAME=eks-agentic-ai
 aws configure set region ap-northeast-2
 
 aws eks update-kubeconfig --name ${CLUSTER_NAME}
-
-# Karpenter 설치
-#helm install karpenter oci://public.ecr.aws/karpenter/karpenter \
-#  --namespace karpenter --create-namespace \
-#  --set settings.clusterName=${var.cluster_name} \
-#  --set settings.clusterEndpoint=$(aws eks describe-cluster --name ${var.cluster_name} --query "cluster.endpoint" --output text) \
-#  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${karpenter_role_arn}
 ```
 
 ### 관리용 소프트웨어 설치 ###
