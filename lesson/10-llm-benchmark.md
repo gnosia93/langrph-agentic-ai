@@ -8,8 +8,6 @@ docker run -it --rm --net=host \
   nvcr.io/nvidia/tritonserver:26.02-py3-sdk \
   bash
 
-
-
 genai-perf profile \
   --model Qwen/Qwen2.5-72B-Instruct \
   --endpoint-type chat \
