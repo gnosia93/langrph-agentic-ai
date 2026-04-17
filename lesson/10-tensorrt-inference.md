@@ -496,6 +496,37 @@ curl -o trtllm-qwen.yaml \
 
 envsubst < trtllm-qwen.yaml | kubectl apply -f -
 ```
+파드 상태를 출력한다.
+```
+kubectl get pods
+```
+[결과]
+```
+NAME                           READY   STATUS     RESTARTS   AGE
+trtllm-qwen-78d96f8d54-lf2bl   0/1     Init:0/1   0          8m55s
+trtllm-qwen-78d96f8d54-rhpqc   0/1     Init:0/1   0          8m55s
+```
+download-from-s3 init 컨테이너의 로그를 출력한다.
+```
+kubectl logs trtllm-qwen-78d96f8d54-lf2bl -c download-from-s3 -f
+```
+[결과]
+```
+download: s3://eks-agentic-ai-tensorrt-llm/trtllm-engines/qwen/rank3.engine to ../engines/qwen/rank3.engine
+download: s3://eks-agentic-ai-tensorrt-llm/trtllm-engines/qwen/rank1.engine to ../engines/qwen/rank1.engine
+download: s3://eks-agentic-ai-tensorrt-llm/trtllm-engines/qwen/rank2.engine to ../engines/qwen/rank2.engine
+download: s3://eks-agentic-ai-tensorrt-llm/trtllm-engines/qwen/rank0.engine to ../engines/qwen/rank0.engine
+=== Downloading tokenizer from S3 ===
+download: s3://eks-agentic-ai-tensorrt-llm/trtllm-models/qwen-hf/.cache/huggingface/.gitignore to ../models/qwen-hf/.cache/huggingface/.gitignore
+download: s3://eks-agentic-ai-tensorrt-llm/trtllm-models/qwen-hf/.cache/huggingface/download/LICENSE.metadata to ../models/qwen-hf/.cache/huggingface/download/LICENSE.metadata
+download: s3://eks-agentic-ai-tensorrt-llm/trtllm-models/qwen-hf/.cache/huggingface/download/model-00014-of-00037.safetensors.metadata to ../models/qwen-hf/.cache/huggingface/download/model-00014-of-00037.safetensors.metadata
+...
+```
+S3 로 부터 모델 다운로드가 완료될때 까지 30분 이상이 소요된다.
+
+> [!TIP]
+> 모델 로딩을 빠르게 하기위해서는 EKS 또는 FSX for Lustre 클러스터를 사용해야 한다.   
+> 하지만 Lustre 의 경우, 초기 로딩시 S3 로 부터 모델을 다운로드 받는 시간이 필요하므로 모델을 S3 로 부터 Lustre 파일 시스템으로 미리 복사해 놓아야 한다.
 
 ## 추론 성능 비교 (versus vLLM) ##
 ```
