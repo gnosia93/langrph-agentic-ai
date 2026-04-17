@@ -493,6 +493,7 @@ aws s3 ls ${ENGINE_BUCKET} --recursive
 ```
 curl -o trtllm-qwen.yaml \
   https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/yaml/trtllm-qwen.yaml
+
 kubectl apply -f trtllm-qwen.yaml
 ```
 
