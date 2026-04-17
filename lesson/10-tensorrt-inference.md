@@ -71,14 +71,12 @@ Downloading 'model-00016-of-00037.safetensors' to '/workspace/qwen-hf/.cache/hug
 > 
 > huggingface-cli download Qwen/Qwen2.5-72B-Instruct --local-dir /workspace/qwen-hf
 > 
-> echo "=== Converting checkpoint ==="
 > python3 /app/examples/models/core/qwen/convert_checkpoint.py \
 >   --model_dir /workspace/qwen-hf \
 >   --output_dir /workspace/qwen-trtllm-ckpt \
 >   --dtype bfloat16 \
 >   --tp_size 4
 >
-> echo "=== Building TRT-LLM engine ==="  
 > trtllm-build \
 >   --checkpoint_dir /workspace/qwen-trtllm-ckpt \
 >   --output_dir /workspace/engines/qwen \
