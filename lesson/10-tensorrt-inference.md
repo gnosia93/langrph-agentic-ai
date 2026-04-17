@@ -59,6 +59,28 @@ Downloading 'model-00016-of-00037.safetensors' to '/workspace/qwen-hf/.cache/hug
 > kubectl exec -it [pod name] -- bash  
 > pip show transformers torch tensorrt_llm  
 
+> [!IMPORTANT]
+>  
+> huggingface-cli download Qwen/Qwen2.5-72B-Instruct --local-dir /workspace/qwen-hf
+
+  echo "=== Converting checkpoint ==="
+  python3 /app/examples/models/core/qwen/convert_checkpoint.py \
+    --model_dir /workspace/qwen-hf \
+    --output_dir /workspace/qwen-trtllm-ckpt \
+    --dtype bfloat16 \
+    --tp_size 4
+
+  echo "=== Building TRT-LLM engine ==="
+  trtllm-build \
+    --checkpoint_dir /workspace/qwen-trtllm-ckpt \
+    --output_dir /workspace/engines/qwen \
+    --max_input_len 4096 \
+    --max_seq_len 8192 \
+    --max_batch_size 64 \
+    --gemm_plugin auto \
+    --gpt_attention_plugin auto
+
+
 ### 모델 배포하기 ###
 [trtllm-qwen.yaml](https://github.com/gnosia93/eks-agentic-ai/blob/main/code/yaml/trtllm-qwen.yaml) 로 TensorRT-LLM 서버를 배포한다.
 ```
