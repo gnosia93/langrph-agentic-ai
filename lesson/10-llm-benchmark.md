@@ -1,13 +1,15 @@
 ## 추론 성능 비교 (versus vLLM) ##
 
-포트 포워딩 설정한 후, 테스트 한다.
+포트 포워딩 설정한 후, tritonserver 도커 이미지를 설치한다.
 ```
 kubectl port-forward svc/trtllm-qwen-svc 8000:80 & 
 
 docker run -it --rm --net=host \
   nvcr.io/nvidia/tritonserver:26.02-py3-sdk \
   bash
-
+```
+테스트를 실행한다.
+```
 genai-perf profile \
   --model Qwen/Qwen2.5-72B-Instruct \
   --endpoint-type chat \
