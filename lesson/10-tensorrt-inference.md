@@ -379,7 +379,7 @@ curl -o trtllm-qwen.yaml \
 kubectl apply -f trtllm-qwen.yaml
 ```
 
-## 성능 밴치마크 ##
+## 추론 성능 비교 (versus vLLM) ##
 ```
 pip install genai-perf
 
@@ -397,13 +397,15 @@ genai-perf profile \
 * Request Latency: 요청당 전체 응답 시간
 
 ### 측정 결과 ###
-
+* vLLM
+  
+* TensorRT-LLM
 
 
 ## 보강 ##
 * 전체 소요 시간 (다운로드, 변환, 빌드 각각) / 필요 디스크 용량.
-* g6e.12xlarge 비용 정보
-* 빌드 전후 추론 성능 비교 (vLLM 대비 등)
+
+
 
 ## 레퍼런스 ##
 * NGC 이미지 태그 목록: https://catalog.ngc.nvidia.com/orgs/nvidia/containers/tritonserver/tags
