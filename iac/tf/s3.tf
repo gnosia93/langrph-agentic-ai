@@ -29,3 +29,32 @@ data "aws_caller_identity" "current" {}
 locals {
   vectordb_bucket_name = "${var.cluster_name}-vectordb-milvus-${data.aws_caller_identity.current.account_id}"
 }
+
+resource "aws_s3_bucket" "milvus" {
+  bucket = local.vectordb_bucket_name
+
+  tags = {
+    Purpose = "Milvus vector storage"
+    Cluster = var.cluster_name
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "milvus" {
+  bucket = aws_s3_bucket.milvus.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "milvus" {
+  bucket = aws_s3_bucket.milvus.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
