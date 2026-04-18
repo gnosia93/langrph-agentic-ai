@@ -93,7 +93,6 @@ AWS 콘솔에서 사용할 모델의 액세스를 먼저 열어줘야 한다.
 ```
 AWS 콘솔 → Bedrock → Model access → 사용할 모델 "Request access"
 ```
-리전마다 지원 모델이 다르다. Claude 계열은 us-west-2(Oregon)와 us-east-1(Virginia)에서 지원 폭이 가장 넓다.
 
 #### 5.2 질의 실행 ####
 Milvus가 EKS 내부(ClusterIP)에 있으므로 앞 단계와 동일하게 kubectl port-forward로 터널을 연 뒤 질의를 실행한다.
