@@ -16,7 +16,8 @@ _This workshopo is under construction, Not fully implemented yet_
    - [벡터DB(Milvus) 설치](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-milvus-install.md)
    - [PDF 문서 저장하기 (레이아웃 파싱/청킹/임베딩)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-pdf-save.md)
    - [LLM 통합하기 (검색/리랭킹/LLM 생성)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-llm-call.md)
-     
+   - RAG MCP 서버 만들기
+       
 * L6. Agentic AI
    - [LangGraph로 RAG 구현](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/6-langgraph-rag.md)
    - [@tool 콜링](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/6-tool-calling.md)
