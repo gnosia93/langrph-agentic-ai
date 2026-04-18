@@ -72,7 +72,7 @@ helm upgrade --install milvus milvus/milvus \
   --set externalS3.useIAM=true \
   --set externalS3.cloudProvider=aws \
   --set externalS3.useSSL=true \
-  -n milvus
+  -n milvus --create-namespace
 ```
 
 > [!TIP]
