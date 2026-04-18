@@ -121,3 +121,25 @@ python main.py --host ${MILVUS_DB_IP} --reset pdfs/*.pdf
 kill $PF_PID
 ```
 
+## [BAAI/bge-m3](https://arxiv.org/pdf/2402.03216) ##
+BAAI(베이징 지능연구원)가 2024년 공개한 오픈소스 다국어 임베딩 모델. 이름의 "M3"는 세 가지 M을 뜻한다.
+
+* Multi-Linguality : 한국어 포함 100+ 언어
+* Multi-Functionality : dense / sparse / multi-vector 검색을 한 모델로
+* Multi-Granularity : 최대 8,192 토큰까지 처리
+
+주요 스펙:
+
+* 베이스	XLM-RoBERTa-large
+* 임베딩 차원	1,024
+* 최대 입력	8,192 토큰
+* 모델 크기	약 2.3GB
+* 라이선스	MIT
+
+강점:
+
+* 한국어/다국어 검색 품질이 우수 (한글 질의 ↔ 영어 문서 크로스링궐도 잘됨)
+* 긴 문서 처리 가능 (대부분 모델은 512 토큰)
+* 무료, 로컬 실행 가능
+* 본 워크샵처럼 영어 논문을 한국어로 검색하는 RAG 파이프라인에 잘 맞는 선택.
+
