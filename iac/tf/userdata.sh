@@ -4,6 +4,22 @@ set -e                                     # 에러 나면, 즉시 중단
 exec > /var/log/userdata.log 2>&1          # 프로세스 교체 없이, 현재 셸의 출력만 변경
 echo "=== UserData Start ==="
 
+# ============================================
+# apt/dpkg 락 대기 (필수)
+# ============================================
+echo "=== Waiting for apt/dpkg locks ==="
+for i in {1..60}; do
+  if ! fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 && \
+     ! fuser /var/lib/dpkg/lock >/dev/null 2>&1 && \
+     ! fuser /var/lib/apt/lists/lock >/dev/null 2>&1; then
+    echo "locks released after ${i}x5s"
+    break
+  fi
+  echo "  [$i/60] still locked, sleeping 5s..."
+  sleep 5
+done
+
+
 # ============================================================
 # 1. VS Code Server (code-server)
 # ============================================================
