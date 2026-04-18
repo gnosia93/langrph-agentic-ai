@@ -5,6 +5,7 @@
 ```
 문서 수집 → (레이아웃) 파싱 → 청킹 → 임베딩 → 벡터DB 저장 → 검색 → 리랭킹 → LLM 생성
 ```
+![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/rag-pipeline.png)
 
 ### 2. 청킹 전략 ###
 
