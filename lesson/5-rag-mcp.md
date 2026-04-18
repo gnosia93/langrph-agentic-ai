@@ -4,6 +4,8 @@ https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/r
 ```
 
 ```
+pip install mcp
+
 # 별도 터미널에서 Milvus port-forward 켜두기
 kubectl port-forward -n milvus svc/milvus 19530:19530
 
