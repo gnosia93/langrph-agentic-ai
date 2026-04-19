@@ -32,7 +32,8 @@ kubectl create serviceaccount s3-access-sa -n default
 kubectl annotate serviceaccount s3-access-sa -n default \
   eks.amazonaws.com/role-arn=arn:aws:iam::${ACCOUNT_ID}:role/eks-agentic-ai-s3-access
 ```
-
+* role/eks-agentic-ai-s3-access 의 경우 테라폼의 s3.tf 에서 이미 생성하였다.
+  
 ### 모델 최적화 하기 ###
 
 TensorRT-LLM을 이용하여 HuggingFace 모델을 NVIDIA GPU에 맞게 최적화한다.  
