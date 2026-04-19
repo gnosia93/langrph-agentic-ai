@@ -25,7 +25,7 @@ variable "gpu_type" {
 variable "system_node_instance_types" {
   description = "EKS system node Group Instance Type "
   type    = list(string)
-  default = ["c7g.2xlarge"]
+  default = ["c7g.4xlarge"]
 }
 
 variable "system_node_ami_type" {
