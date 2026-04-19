@@ -56,12 +56,12 @@ EOF
 ```bash
 helm install neo4j neo4j/neo4j -n neo4j \
   -f neo4j-values.yaml --create-namespace
-```
 
-#### 4. 설치 확인
-
-```bash
 kubectl get all -n neo4j
+```
+[결과]
+```
+...
 ```
 
 ## 접속 테스트
