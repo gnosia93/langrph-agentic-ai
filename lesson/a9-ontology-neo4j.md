@@ -46,3 +46,11 @@ neo4j 를 설치한다.
 helm install neo4j neo4j/neo4j -n neo4j \
   -f neo4j-values.yaml --create-namespace
 ```
+#### 설치확인 ####
+```
+kubectl get all -n neo4j
+```
+[결과]
+```
+```
+
