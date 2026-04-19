@@ -52,7 +52,7 @@ https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/r
 
 ### 4. 실행 스크립트 작성 (query.py) ###
 ```
-cat < 'EOF' > query.py
+cat << 'EOF' > query.py
 import argparse
 from RAGSearch import RAGSearch
 
