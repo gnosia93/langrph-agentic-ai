@@ -53,7 +53,9 @@ EOF
 > 
 > 필요한 부분만 grep    
 > grep -A1 -iE "openai|ollama|env" default-values.yaml    
-> 
+>
+> open-webui 삭제  
+> helm uninstall open-webui -n webui
 
 helm 차트를 이용하여 배포한다. 
 ```
