@@ -63,15 +63,21 @@ EOF
 ### 3. ECR 푸시 ###
 
 ```bash
-aws ecr create-repository --repository-name rag-mcp --region us-west-2
+export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+export TOKEN=$(curl -sX PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+export AWS_REGION=$(curl -sH "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/region)
+echo "ACCOUNT_ID: $ACCOUNT_ID"
+echo "AWS_REGION: $AWS_REGION"
 
-aws ecr get-login-password --region us-west-2 | \
+aws ecr create-repository --repository-name rag-mcp --region ${AWS_REGION}
+
+aws ecr get-login-password --region ${AWS_REGION} | \
   docker login --username AWS --password-stdin \
-  <ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com
+  ${ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com
 
 docker build -t rag-mcp:latest .
-docker tag rag-mcp:latest <ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com/rag-mcp:latest
-docker push <ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com/rag-mcp:latest
+docker tag rag-mcp:latest ${ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/rag-mcp:latest
+docker push ${ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/rag-mcp:latest
 ```
 
 ### 4. EKS 배포 ###
