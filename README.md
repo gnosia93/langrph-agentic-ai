@@ -16,11 +16,11 @@ _This workshop is under construction, Not fully implemented yet_
 * [L4. 파인튜닝하기 (인스트럭션 튜닝)](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/4-finetune.md)
 
 * L5. RAG 파이프라인
-   - [RAG 파이프라인 개념](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-rag-pipeline-concept.md)
-   - [벡터DB(Milvus) 설치](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-milvus-install.md)
-   - [PDF 문서 저장하기 (레이아웃 파싱/청킹/임베딩)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-pdf-save.md)
-   - [RAGSearch 구현하기 (검색/리랭킹/LLM 답변)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-llm-call.md)
-   - [RAGSearch MCP 서버 배포 (EKS)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-rag-mcp.md)
+   - [RAG 개요 (아키텍처와 동작 원리)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-rag-pipeline-concept.md)
+   - [벡터DB 구축 (Milvus on EKS)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-milvus-install.md)
+   - [문서 처리 파이프라인 (레이아웃 파싱 → 청킹 → 임베딩)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-pdf-save.md)
+   - [RAG 백엔드 구현 (검색 → 리랭킹 → 답변 생성)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-llm-call.md)
+   - [MCP 서버로 배포 (EKS)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-rag-mcp.md)
          
 * L6. Agentic AI
    - [Open WebUI 설치](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/6-llm-webui.md)
