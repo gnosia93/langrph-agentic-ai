@@ -18,14 +18,16 @@ echo "VPC_ID: $VPC_ID"
 export AMI_ID=$(aws ssm get-parameter \
   --name /aws/service/deeplearning/ami/x86_64/base-oss-nvidia-driver-gpu-ubuntu-22.04/latest/ami-id \
   --region ${AWS_REGION} --query 'Parameter.Value' --output text)
-
 export SG_ID=$(aws ec2 describe-security-groups --filters \
   "Name=group-name,Values=eks-host-sg" "Name=vpc-id,Values=${VPC_ID}" \
   --query 'SecurityGroups[0].GroupId' --output text)
-
 export PUBLIC_SUBNET_ID=$(aws ec2 describe-subnets \
   --filters "Name=vpc-id,Values=${VPC_ID}" \
   --query 'Subnets[?MapPublicIpOnLaunch==`true`] | [0].SubnetId' --output text)
+
+echo "AMI_ID: $AMI_ID"
+echo "SG_ID: $SG_ID"
+echo "PUBLIC_SUBNET_ID: $PUBLIC_SUBNET_ID"
 ```
 
 ```
