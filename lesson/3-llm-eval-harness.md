@@ -74,6 +74,21 @@ kubectl -n llm-eval logs -f deploy/vllm-current
 kubectl -n llm-eval rollout status deploy/vllm-current --timeout=900s
 ```
 
+```
+# Port-forward
+kubectl -n llm-eval port-forward svc/vllm-current 8000:8000
+
+# 다른 터미널
+curl http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "messages": [{"role": "user", "content": "안녕?"}],
+    "max_tokens": 50
+  }'
+```
+
+
 ## Bedrock 모델 ##
 
 IRSA로 평가 Pod에 권한 부여:
