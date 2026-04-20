@@ -1,3 +1,38 @@
+### 수정할 내용 ###
+```
+ 3.1 후보 모델 선정
+      - 오픈소스 LLM 현황 (Llama 3.1, Qwen 2.5, Mistral, Gemma, Phi 등)
+      - 크기별 트레이드오프 (7B / 13B / 32B / 70B+)
+      - 라이선스 체크 (상업 이용 가능 여부)
+
+  3.2 평가 축 4가지
+      - 일반 능력: lm-eval-harness (MMLU, ARC, HellaSwag)
+      - 언어 모델링: Perplexity
+      - 도메인 적합성: 커스텀 벤치마크
+      - 응답 품질: LLM-as-a-Judge
+
+  3.3 인프라 제약 평가
+      - GPU 메모리 요구량 (A10G/L4/A100/H100)
+      - 추론 속도 / 처리량 (tokens/sec)
+      - 배포 비용 (시간당 $$)
+
+  3.4 비교 매트릭스와 최종 선택
+      - 점수표 작성
+      - "우리 서비스에 Qwen2.5-32B를 선택한 이유"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Foundation 모델 ##
 * https://huggingface.co/Qwen/Qwen3.5-27B
 ```
