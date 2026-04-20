@@ -28,8 +28,8 @@ eksctl create nodegroup \
   --node-type=c8i.4xlarge \
   --nodes=2 \
   --nodes-min=2 \
-  --nodes-max=2 \
-  --node-volume-size=100 \
+  --nodes-max=4 \
+  --node-volume-size=300 \
   --node-volume-type=gp3 \
   --node-labels="workload=agent" \
   --node-taints="dedicated=agent:NoSchedule" \
