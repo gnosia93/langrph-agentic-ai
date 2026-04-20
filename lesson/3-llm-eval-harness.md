@@ -2,7 +2,7 @@
 ### 테스트 대상 모델 ###
 ```
 [대상 모델]
- ├─ 로컬 배포 (GPU Pod)
+ ├─ 오픈소스 모델 (GPU Pod)
  │   ├─ Llama 3.1 8B
  │   ├─ Qwen 2.5 7B / 32B
  │   ├─ Gemma 2 9B
@@ -46,7 +46,10 @@ eksctl create iamserviceaccount \
   --approve
 ```
 
-### HuggingFace 토큰 (게이트 모델용) ###
+
+## 오픈소스 모델 ##
+
+### 1. HuggingFace 토큰 (게이트 모델용) ###
 Llama, Gemma 등 승인 필요한 모델은 HF 토큰 시크릿으로 제공:
 ```
 kubectl create secret generic hf-token \
@@ -54,8 +57,7 @@ kubectl create secret generic hf-token \
   --from-literal=token=$HF_TOKEN
 ```
 
-
-### Deployment ###
+### 2. 모델 배포 ###
 ```
 # vllm-qwen25-7b.yaml
 apiVersion: apps/v1
@@ -113,7 +115,7 @@ spec:
       targetPort: 8000
 ```
 
-### 동작 확인 ###
+### 3. 동작 확인 ###
 ```
 kubectl -n llm-eval port-forward svc/vllm-qwen25-7b 8000:8000
 
@@ -124,3 +126,10 @@ curl http://localhost:8000/v1/chat/completions \
     "messages": [{"role": "user", "content": "한국의 수도는?"}]
   }'
 ```
+
+### 4. 테스트 ###
+```
+
+```
+
+
