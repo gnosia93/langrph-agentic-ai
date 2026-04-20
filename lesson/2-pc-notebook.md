@@ -1,7 +1,5 @@
 ## GPU 할당 및 주피터 노트북 설정 ##
 ### [g7e.4xlarge](https://aws.amazon.com/ko/ec2/instance-types/g7e/) 인스턴스 생성 ###
-
-환경 변수를 설정한다. 
 ```
 export CLUSTER_NAME=eks-agentic-ai
 export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
