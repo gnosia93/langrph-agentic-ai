@@ -158,6 +158,13 @@ spec:
         app: rag-mcp
     spec:
       serviceAccountName: rag-mcp-sa
+      nodeSelector:
+        workload: agent
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: agent
+          effect: NoSchedule
       containers:
         - name: rag-mcp
           image: ${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/rag-mcp:latest
