@@ -13,40 +13,6 @@
      └─ Llama 3.1 70B (Bedrock)
 ```
 
-
-### Bedrock 접근 준비 ###
-
-IRSA로 평가 Pod에 권한 부여:
-```
-cat > bedrock-eval-policy.json <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": [
-      "bedrock:InvokeModel",
-      "bedrock:InvokeModelWithResponseStream",
-      "bedrock:Converse",
-      "bedrock:ConverseStream"
-    ],
-    "Resource": "*"
-  }]
-}
-EOF
-
-aws iam create-policy \
-  --policy-name LLMEvalBedrockAccess \
-  --policy-document file://bedrock-eval-policy.json
-
-eksctl create iamserviceaccount \
-  --cluster=$CLUSTER_NAME \
-  --namespace=llm-eval \
-  --name=llm-eval-sa \
-  --attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/LLMEvalBedrockAccess \
-  --approve
-```
-
-
 ## 오픈소스 모델 ##
 
 ### 1. HuggingFace 토큰 ###
@@ -107,3 +73,37 @@ kubectl -n llm-eval logs -f deploy/vllm-current
 # Ready 확인
 kubectl -n llm-eval rollout status deploy/vllm-current --timeout=900s
 ```
+
+## Bedrock 모델 ##
+
+IRSA로 평가 Pod에 권한 부여:
+```
+cat > bedrock-eval-policy.json <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": [
+      "bedrock:InvokeModel",
+      "bedrock:InvokeModelWithResponseStream",
+      "bedrock:Converse",
+      "bedrock:ConverseStream"
+    ],
+    "Resource": "*"
+  }]
+}
+EOF
+
+aws iam create-policy \
+  --policy-name LLMEvalBedrockAccess \
+  --policy-document file://bedrock-eval-policy.json
+
+eksctl create iamserviceaccount \
+  --cluster=$CLUSTER_NAME \
+  --namespace=llm-eval \
+  --name=llm-eval-sa \
+  --attach-policy-arn=arn:aws:iam::${ACCOUNT_ID}:policy/LLMEvalBedrockAccess \
+  --approve
+```
+
+
