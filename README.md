@@ -9,10 +9,9 @@ _This workshop is under construction, Not fully implemented yet_
 - RAG + Agentic 워크플로우를 프로덕션급으로 배포
 - 가드레일·관측성·LLMOps 파이프라인 구축
 
-대상 독자:    
-- EKS 운영 경험이 있고 LLM 서비스를 실전에 도입하려는 엔지니어
+대상 독자: EKS 운영 경험이 있고 LLM 서비스를 실전에 도입하려는 엔지니어
 
-### Topics ### 
+### _Topics_ ### 
 
 * [L1. EKS 설치하기](https://github.com/gnosia93/eks-agentic-ai/tree/main/iac/tf)
 
