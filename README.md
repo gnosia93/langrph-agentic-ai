@@ -50,7 +50,8 @@ _drawn by Nano Banana 2.0 with a rough prompt, Not perfect but it's amazong !_
    - RAG 검색 품질 평가
    - LLM 답변 품질 평가
    - 에이전트 행동 평가 (tool 선택, 실행 순서)
-   - 엔드투엔드 평가
+   - 골든 데이터셋 구축
+   - A/B 테스팅
     
 * L9. LLMOps
    - [LLMOps의 개념](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/9-cicd-llmops.md)
