@@ -89,6 +89,8 @@ kubectl create secret generic hf-token -n llm-eval \
 ### 2. Manifest 다운로드 ###
 ```
 mkdir eval && cd eval
+pip install lm-eval
+kubectl create ns lm-eval
 
 curl -o vllm-eval.yaml \
 https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/eval/vllm-eval.yaml
