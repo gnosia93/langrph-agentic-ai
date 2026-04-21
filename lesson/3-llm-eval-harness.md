@@ -200,6 +200,10 @@ EOF
 bash eval-all.sh
 ```
 
+> [!TIP]
+> vllm-eval 파드 로그 확인:  
+> kubectl logs -n llm-eval -f deploy/vllm-eval
+
 
 ### 4. 결과 확인 ###
 `결과 테이블로 출력`:
