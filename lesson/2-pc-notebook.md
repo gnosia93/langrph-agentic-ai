@@ -120,11 +120,10 @@ Host gpu-dev
 1. ssh 로 EC2 인스턴스에 로그인하여 아래 명령어를 실행한다.
 ```
 echo 'source /opt/pytorch/bin/activate' >> ~/.bashrc
-
-source /opt/pytorch/bin/activate
-pip install ipykernel
-python -m ipykernel install --user --name pytorch --display-name "Python (pytorch)"
-jupyter kernelspec list
+echo 'python -m ipykernel install --user --name pytorch --display-name "Python (pytorch)"'
+#source /opt/pytorch/bin/activate
+#pip install ipykernel
+#jupyter kernelspec list
 ``` 
 
 2. VS Code 에서 `Ctrl+Shift+P → "Remote-SSH: Connect to Host" → gpu-dev 선택 → continue 선택`
