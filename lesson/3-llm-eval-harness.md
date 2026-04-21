@@ -96,8 +96,8 @@ https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/e
 
 ### 3. 모델 테스트 (스크립트) ###
 ```
+cat << EOF > eval-all.sh
 #!/bin/bash
-# eval-all.sh
 set -euo pipefail
 
 MODELS=(
@@ -170,8 +170,8 @@ for MODEL in "${MODELS[@]}"; do
     continue
   fi
 done
-
 echo "=== all evaluations complete ==="
+EOF
 ```
 
 ### 4. 결과 확인 ###
