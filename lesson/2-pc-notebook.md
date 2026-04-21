@@ -106,16 +106,13 @@ python /tmp/check.py
 >    --region ${AWS_REGION})
 > ```
 
-
-
-
 ### 2. PC 의 VS-CODE 로 접속하기 ###
 이 방식은 로컬 PC 의 vs-code IDE 에서 리모트 서버로 ssh 로 접속하여 주피터 노트북을 실행하는 방법이다.
 
 `~/.ssh/config 파일에 추가`:
 ```
 Host gpu-dev
-  HostName <EC2-IP>
+  HostName <EC2-IP or DNS>
   User ubuntu
   IdentityFile <KeyFile Path>
 ```
