@@ -118,18 +118,21 @@ Host gpu-dev
 ```
 
 1. `Ctrl+Shift+P → "Remote-SSH: Connect to Host" → gpu-dev 선택 → continue 선택`
+   
+![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/vscode-remote-ssh.png)
 
-2. `VS Code에서 Jupyter 확장 설치`: 
+
+3. `VS Code에서 Jupyter 확장 설치`: 
    Extensions 탭 → "Jupyter" 검색 → Install in SSH
 
-3. `노트북 파일 생성`: 
+4. `노트북 파일 생성`: 
    Ctrl+Shift+P → "Create: New Jupyter Notebook"
  
-4. `커널 선택`: 
+5. `커널 선택`: 
    우측 상단 "Select Kernel" 클릭
    → "Python Environments" → gpu-dev (~/gpu-dev/bin/python)
 
-5. `GPU 및 CUDA 버전 등을 확인` 
+6. `GPU 및 CUDA 버전 등을 확인` 
 
 ![](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/images/vscode-jupyter-2.png)
 
