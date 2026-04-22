@@ -139,11 +139,7 @@ kubectl get pods -n llm-serving -l leaderworkerset.sigs.k8s.io/name=vllm-llama-4
 ```
 
 ## 마치며 ##
-LWS는 "대형 LLM 분산 추론을 선언적으로 표현하고 싶다"는 요구에서 출발해, 기존 StatefulSet + Service + Init Container 조합으로 어거지로 만들던 구성을 간결하게 바꿀 수 있다. 특히 vLLM 커뮤니티가 LWS를 표준 배포 방식으로 밀고 있어서, 생태계 호환성 측면에서도 이점이 있다.
-
-```
-독자가 "왜 필요한가 → 무엇이 다른가 → 어떻게 쓰는가 → 언제 쓰나"로 자연스럽게 따라갈 수 있게 구성
-```
+LWS는 "대형 LLM 분산 추론을 선언적으로 관리하고 싶다"라는 요구에서 출발해, 기존 StatefulSet + Service + Init Container 조합의 구성을 간결하게 바꿀 수 있다. 특히 vLLM 커뮤니티가 LWS를 표준 배포 방식으로 채택하고 있어서, 생태계 호환성 측면에서도 이점이 있다.
 
 ## 레퍼런스 ##
 * [vllm lws](https://docs.vllm.ai/en/latest/deployment/frameworks/lws/)
