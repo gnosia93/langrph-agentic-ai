@@ -278,3 +278,4 @@ grace period 안에 preStop 시간도 포함됩니다. 즉 preStop이 30초면, 
 
 ## 레퍼런스 ##
 * [vllm lws](https://docs.vllm.ai/en/latest/deployment/frameworks/lws/)
+* [k8s volume](https://kubernetes.io/docs/concepts/storage/volumes/)
