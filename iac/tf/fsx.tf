@@ -5,27 +5,36 @@ resource "aws_security_group" "fsx_lustre" {
   name        = "fsx-sg"
   description = "FSx Lustre access"
   vpc_id      = aws_vpc.main.id
-}
 
-# EFA는 all-traffic self-reference 필요 (ingress + egress 모두)
-resource "aws_security_group_rule" "fsx_self_ingress_all" {
-  type              = "ingress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  security_group_id = aws_security_group.fsx_lustre.id
-  self              = true
-  description       = "EFA all traffic self"
-}
+  # EFA requirement: all traffic to/from self
+  ingress {
+    description = "EFA self all traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self        = true
+  }
 
-resource "aws_security_group_rule" "fsx_self_egress_all" {
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  security_group_id = aws_security_group.fsx_lustre.id
-  self              = true
-  description       = "EFA all traffic self"
+  egress {
+    description = "EFA self all traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self        = true
+  }
+
+  # 일반 아웃바운드도 유지 (S3 등)
+  egress {
+    description = "All outbound"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "fsx-sg"
+  }
 }
 
 # EKS 노드 → FSx (all)
