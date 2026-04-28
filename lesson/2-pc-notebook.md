@@ -145,6 +145,6 @@ jupyter lab --ip=0.0.0.0 --port=8080 --no-browser --NotebookApp.token='' --Noteb
 ![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/jupyter-notebook.png)
 
 
-## 페러런스 ##
+## 레퍼런스 ##
 
 * https://aws.amazon.com/ko/ec2/pricing/on-demand/
