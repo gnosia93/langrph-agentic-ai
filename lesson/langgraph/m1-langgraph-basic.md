@@ -76,12 +76,10 @@ from langgraph.graph import StateGraph, START, END
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
-
 class State(TypedDict):
     original: str        # 영어 원문
     translated: str      # 한국어 번역
     summary: str         # 한 줄 요약
-
 
 def translate(state: State) -> dict:
     resp = llm.invoke(
