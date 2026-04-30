@@ -83,3 +83,184 @@ START ▶│  agent  │◀──────────┐
  │approval │──────▶│ execute │
  └─────────┘       └─────────┘
 ```
+
+### 4. 실습 코드 (시작 템플릿) ###
+```
+"""
+실습: AWS 비용 질의 에이전트 (ReAct + HITL)
+TODO 표시된 곳을 채워 완성하세요.
+"""
+from typing import Annotated, TypedDict
+from dotenv import load_dotenv
+
+from langchain_aws import ChatBedrockConverse
+from langchain_core.messages import BaseMessage
+from langchain_core.tools import tool
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langgraph.prebuilt import ToolNode, tools_condition
+from langgraph.types import Command, interrupt
+
+load_dotenv()
+
+
+# ── 1) 도구 정의 ──────────────────────────────────────────────
+# (실습용 가짜 데이터. 오후 실습에서 실제 AWS API로 바꿀 수 있음)
+
+PRICING = {
+    "c7i.large": 0.1020, "c7i.xlarge": 0.2040,
+    "c7g.large": 0.0816, "c7g.xlarge": 0.1632,
+    "c8g.large": 0.0870,
+}
+
+INSTANCES = [
+    {"id": "i-001", "type": "c7i.large",  "region": "us-west-2"},
+    {"id": "i-002", "type": "c7i.xlarge", "region": "us-west-2"},
+    {"id": "i-003", "type": "c7g.large",  "region": "us-west-2"},
+]
+
+
+@tool
+def list_ec2_instances(region: str) -> list[dict]:
+    """지정한 리전의 EC2 인스턴스 목록을 반환한다. 예: 'us-west-2'"""
+    return [i for i in INSTANCES if i["region"] == region]
+
+
+@tool
+def get_pricing(instance_type: str) -> str:
+    """EC2 인스턴스 타입의 시간당 가격(USD)을 조회한다. 예: 'c7i.large'"""
+    price = PRICING.get(instance_type)
+    if price is None:
+        return f"{instance_type}: 가격 정보 없음"
+    return f"{instance_type}: ${price}/hour"
+
+
+@tool
+def recommend_graviton_alternative(instance_type: str) -> str:
+    """x86 인스턴스 타입에 대응하는 Graviton(ARM) 대안과 예상 절감률을 제시한다."""
+    mapping = {
+        "c7i.large":  ("c7g.large",  "약 20% 저렴"),
+        "c7i.xlarge": ("c7g.xlarge", "약 20% 저렴"),
+    }
+    alt = mapping.get(instance_type)
+    if not alt:
+        return f"{instance_type}의 Graviton 대안 정보 없음"
+    return f"{instance_type} → {alt[0]} ({alt[1]})"
+
+
+@tool
+def terminate_instance(instance_id: str) -> str:
+    """지정한 EC2 인스턴스를 종료한다. 주의: 되돌릴 수 없음."""
+    return f"Instance {instance_id} terminated."
+
+
+SAFE_TOOLS = [list_ec2_instances, get_pricing, recommend_graviton_alternative]
+SENSITIVE_TOOLS = [terminate_instance]
+ALL_TOOLS = SAFE_TOOLS + SENSITIVE_TOOLS
+SENSITIVE_NAMES = {t.name for t in SENSITIVE_TOOLS}
+
+
+# ── 2) 모델 + 도구 바인딩 ─────────────────────────────────────
+
+llm = ChatBedrockConverse(
+    model="anthropic.claude-3-5-sonnet-20241022-v2:0",
+    region_name="ap-northeast-2",
+    temperature=0,
+    max_tokens=2048,
+)
+llm_with_tools = llm.bind_tools(ALL_TOOLS)
+
+
+# ── 3) 상태 정의 ──────────────────────────────────────────────
+
+class State(TypedDict):
+    messages: Annotated[list[BaseMessage], add_messages]
+
+
+# ── 4) 노드 정의 ──────────────────────────────────────────────
+
+def agent(state: State) -> dict:
+    """LLM이 다음 행동을 결정하는 노드."""
+    # TODO 1: llm_with_tools로 state["messages"]를 invoke하고,
+    #         결과를 {"messages": [resp]} 형태로 반환하세요.
+    ...
+
+
+def route_after_agent(state: State) -> str:
+    """LLM이 도구를 호출했는지, 민감 도구인지에 따라 분기."""
+    last = state["messages"][-1]
+    if not getattr(last, "tool_calls", None):
+        return END
+    # 민감 도구가 포함돼 있으면 approval로
+    if any(tc["name"] in SENSITIVE_NAMES for tc in last.tool_calls):
+        return "approval"
+    return "tools"
+
+
+def approval(state: State) -> dict:
+    """민감 도구 호출 직전에 사람에게 승인 요청."""
+    last = state["messages"][-1]
+    sensitive_calls = [
+        tc for tc in last.tool_calls if tc["name"] in SENSITIVE_NAMES
+    ]
+    # TODO 2: interrupt(...)로 사용자 결정을 받고,
+    #         "approve"면 sensitive_tools 노드로, 아니면 END로 가도록
+    #         반환 dict를 설계하세요.
+    #         힌트: approval에서는 라우팅을 위한 플래그를
+    #         별도 상태 필드로 넣거나, ToolMessage로 거절 답변을 남기는 방식이 있습니다.
+    ...
+
+
+safe_tools = ToolNode(SAFE_TOOLS)
+sensitive_tools = ToolNode(SENSITIVE_TOOLS)
+
+
+# ── 5) 그래프 조립 ────────────────────────────────────────────
+
+def build_graph():
+    builder = StateGraph(State)
+    builder.add_node("agent", agent)
+    builder.add_node("tools", safe_tools)
+    builder.add_node("approval", approval)
+    builder.add_node("sensitive_tools", sensitive_tools)
+
+    builder.add_edge(START, "agent")
+    # TODO 3: "agent"에서 route_after_agent로 조건부 엣지를 추가하세요.
+    #         가능한 목적지: "tools", "approval", END
+    ...
+    builder.add_edge("tools", "agent")
+    builder.add_edge("sensitive_tools", "agent")
+
+    # interrupt를 쓰려면 체크포인터 필수
+    return builder.compile(checkpointer=MemorySaver())
+
+
+# ── 6) 실행 ───────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    graph = build_graph()
+    cfg = {"configurable": {"thread_id": "demo-1"}}
+
+    # 시나리오 1: 안전한 조회 (HITL 안 걸림)
+    print("=" * 60, "\n[시나리오 1] 가격 조회\n")
+    result = graph.invoke(
+        {"messages": [("user", "us-west-2에 있는 c7i.large의 Graviton 대안과 가격을 알려줘")]},
+        config=cfg,
+    )
+    print(result["messages"][-1].content)
+
+    # 시나리오 2: 민감 작업 (HITL 걸림)
+    print("=" * 60, "\n[시나리오 2] 인스턴스 종료 요청\n")
+    cfg2 = {"configurable": {"thread_id": "demo-2"}}
+    first = graph.invoke(
+        {"messages": [("user", "i-002 인스턴스를 종료해줘")]},
+        config=cfg2,
+    )
+    # interrupt가 걸렸다면 __interrupt__ 키가 채워진다
+    print("중단됨:", first.get("__interrupt__"))
+
+    # 사람의 승인(또는 거절)으로 재개
+    resumed = graph.invoke(Command(resume="approve"), config=cfg2)
+    print(resumed["messages"][-1].content)
+```
