@@ -182,10 +182,11 @@ class State(TypedDict):
 
 def agent(state: State) -> dict:
     """LLM이 다음 행동을 결정하는 노드."""
+    
     # TODO 1: llm_with_tools로 state["messages"]를 invoke하고,
     #         결과를 {"messages": [resp]} 형태로 반환하세요.
-    ...
-
+    resp = llm_with_tools.invoke(state["messages"])
+    return {"messages": [resp]}
 
 def route_after_agent(state: State) -> str:
     """LLM이 도구를 호출했는지, 민감 도구인지에 따라 분기."""
@@ -197,20 +198,41 @@ def route_after_agent(state: State) -> str:
         return "approval"
     return "tools"
 
-
 def approval(state: State) -> dict:
     """민감 도구 호출 직전에 사람에게 승인 요청."""
     last = state["messages"][-1]
     sensitive_calls = [
         tc for tc in last.tool_calls if tc["name"] in SENSITIVE_NAMES
     ]
+    
     # TODO 2: interrupt(...)로 사용자 결정을 받고,
     #         "approve"면 sensitive_tools 노드로, 아니면 END로 가도록
     #         반환 dict를 설계하세요.
     #         힌트: approval에서는 라우팅을 위한 플래그를
     #         별도 상태 필드로 넣거나, ToolMessage로 거절 답변을 남기는 방식이 있습니다.
-    ...
+    decision = interrupt({
+        "question": "아래 민감 작업을 실행할까요?",
+        "tool_calls": sensitive_calls,
+    })
 
+    if decision == "approve":
+        return {}  # 상태 변경 없음 → sensitive_tools로 진행
+    # 거절: LLM에게 거절 사실을 알려주는 ToolMessage 추가
+    from langchain_core.messages import ToolMessage
+    return {
+        "messages": [
+            ToolMessage(content="사용자가 실행을 거부했습니다.",
+                        tool_call_id=tc["id"])
+            for tc in sensitive_calls
+        ]
+    }
+
+def route_after_approval(state: State) -> str:
+    """approval 이후 라우팅: 마지막이 ToolMessage면 거절된 것."""
+    last = state["messages"][-1]
+    if last.__class__.__name__ == "ToolMessage":
+        return "agent"
+    return "sensitive_tools"
 
 safe_tools = ToolNode(SAFE_TOOLS)
 sensitive_tools = ToolNode(SENSITIVE_TOOLS)
@@ -228,7 +250,15 @@ def build_graph():
     builder.add_edge(START, "agent")
     # TODO 3: "agent"에서 route_after_agent로 조건부 엣지를 추가하세요.
     #         가능한 목적지: "tools", "approval", END
-    ...
+    builder.add_conditional_edges(
+        "agent", route_after_agent,
+        {"tools": "tools", "approval": "approval", END: END},
+    )
+    builder.add_conditional_edges(
+        "approval", route_after_approval,
+        {"agent": "agent", "sensitive_tools": "sensitive_tools"},
+    )
+    
     builder.add_edge("tools", "agent")
     builder.add_edge("sensitive_tools", "agent")
 
@@ -264,3 +294,30 @@ if __name__ == "__main__":
     resumed = graph.invoke(Command(resume="approve"), config=cfg2)
     print(resumed["messages"][-1].content)
 ```
+#### 확인 포인트 ####
+* 시나리오 1에서 에이전트가 list_ec2_instances → get_pricing → recommend_graviton_alternative 순으로 여러 번 도구를 호출하는지 (ReAct 루프 확인)
+* 시나리오 2에서 __interrupt__ 키에 질문이 들어오며 그래프가 멈추는지
+* Command(resume="approve")와 Command(resume="deny")를 각각 돌려 결과가 달라지는지
+* graph.get_graph().draw_mermaid()로 네 개 노드와 조건부 엣지가 그려지는지
+
+
+### 5. 보너스 과제 ###
+#### 사전 정의된 tools_condition 써보기 ####
+route_after_agent를 직접 짜지 말고 tools_condition으로 먼저 가게 한 뒤, 도구 노드 안에서 민감 여부를 따지는 방식으로도 같은 결과를 만들어 본다. 두 설계의 장단점 비교.
+
+#### 실제 boto3로 바꾸기 ####
+get_pricing과 list_ec2_instances를 실제 AWS API 호출로 교체.
+```
+@tool
+def list_ec2_instances(region: str) -> list[dict]:
+    """지정한 리전의 EC2 인스턴스 목록을 반환한다."""
+    import boto3
+    ec2 = boto3.client("ec2", region_name=region)
+    resp = ec2.describe_instances()
+    return [
+        {"id": i["InstanceId"], "type": i["InstanceType"], "region": region}
+        for r in resp["Reservations"] for i in r["Instances"]
+    ]
+```    
+#### LangGraph Studio로 디버깅 ####
+langgraph.json을 만들고 langgraph dev로 띄우면 Studio UI에서 HITL 중단 지점을 시각적으로 확인하고 승인/거절을 눌러볼 수 있다.
