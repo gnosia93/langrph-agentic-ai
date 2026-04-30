@@ -1,12 +1,14 @@
 ## LangGraph로 Agentic AI 만들기 ##
 
+### 오전 (3시간) — LangGraph 에이전트 만들기 ###
+* M1. LangGraph 기본기 (번역/요약 파이프라인)
+* M2. 도구 사용 에이전트 + HITL (ReAct 에이전트)
+* M3. 컨테이너화 + 로컬 테스트 (Docker 이미지)
 
-* 오전: 기본기 (A의 1~4)
-* 오후 1부: 멀티 에이전트 — Supervisor 패턴, Swarm 패턴
-* 오후 2부: LangGraph Platform — 커스텀 인증(OAuth), 리소스 ACL, Postgres 체크포인터
-* 오후 3부: 관측성 — LangSmith로 트레이싱, 평가(evaluation) 파이프라인
-결과물: 멀티 에이전트가 인증된 사용자별로 격리돼 작동하고, LangSmith에서 추적·평가까지 되는 시스템.
-
+### 오후 (3시간) — EKS + Graviton 배포 ###
+* M4. 왜 AI 워크로드에 Graviton인가	(개념 + 사례)
+* M5. EKS에 에이전트 배포	(실제 파드 기동)
+* M6. 성능·비용 실측 (x86 vs Graviton) (k6 + CloudWatch 리포트)
 ---
 각 모듈 상세
 ```
