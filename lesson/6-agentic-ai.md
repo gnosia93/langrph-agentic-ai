@@ -126,6 +126,8 @@ python setup/preflight.py
 
 ### [2. 도구 / 조건부 라우팅 / HITL](https://github.com/gnosia93/lg-agentic-ai/blob/main/lesson/langgraph/m2-tool-calling.md) ###
 
+### [3. 멀티 에이전트](https://github.com/gnosia93/lg-agentic-ai/blob/main/lesson/langgraph/m3-multi-agent.md)
+
 ### 3. OAuth ###
 
 
