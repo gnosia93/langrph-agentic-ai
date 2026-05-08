@@ -3,8 +3,8 @@
 ### 1. [g7e.4xlarge](https://aws.amazon.com/ko/ec2/instance-types/g7e/) 인스턴스 생성 ###
 ```
 export KEY_NAME="aws-kp-2"
-#export INSTANCE_TYPE="g7e.4xlarge"
-export INSTANCE_TYPE="g6e.xlarge"
+export INSTANCE_TYPE="g7e.4xlarge"
+#export INSTANCE_TYPE="g6e.xlarge"
 export CLUSTER_NAME=eks-agentic-ai
 export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 export TOKEN=$(curl -sX PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
