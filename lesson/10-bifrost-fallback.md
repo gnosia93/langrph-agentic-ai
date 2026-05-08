@@ -145,7 +145,7 @@ Bifrost의 매력은 "프로바이더 추상화 + 게이트웨이 기능"을 코
 
 ## 레퍼런스 ##
 * https://github.com/maximhq/bifrost
-
+* https://www.getmaxim.ai/bifrost/blog
 
 ## todo ##
 * 클러스터 배포,
