@@ -1,5 +1,5 @@
 ## 프로젝트 생성하기 ##
-본 워크샵에서는 uv 를 활용하여 파이썬 프로젝트를 관리한다. uv는 Astral에서 만든 Python 패키지 및 프로젝트 매니저로 Rust로 작성되어 있고, 기존 도구들(pip, pip-tools, virtualenv, pyenv, poetry 등)을 하나로 대체하는 걸 목표로 하고 있다. pip보다 10~100배 빠르고 uvx 명령어로 패키지를 격리된 환경에서 일회성으로 실행할 수 있다. 
+본 워크샵에서는 [uv](https://docs.astral.sh/uv/getting-started/installation/) 를 활용하여 파이썬 프로젝트를 관리한다. uv는 Astral에서 만든 Python 패키지 및 프로젝트 매니저로 Rust로 작성되어 있고, 기존 도구들(pip, pip-tools, virtualenv, pyenv, poetry 등)을 하나로 대체하는 걸 목표로 하고 있다. pip보다 10~100배 빠르고 uvx 명령어로 패키지를 격리된 환경에서 일회성으로 실행할 수 있다. 
 ```
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
