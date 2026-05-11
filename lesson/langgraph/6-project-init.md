@@ -40,3 +40,8 @@ uv run python main.py
 ```
 Hello from my-langchain-app!
 ```
+
+## 레퍼런스 ##
+
+* https://docs.langchain.com/oss/python/langgraph/overview
+
