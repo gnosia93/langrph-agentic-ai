@@ -41,8 +41,6 @@ agent.invoke(
 )
 ```
 
-
-
-## 페러런스 ##
+## 레퍼런스 ##
 
 * https://docs.langchain.com/langsmith/home
