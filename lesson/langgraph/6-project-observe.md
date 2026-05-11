@@ -13,6 +13,8 @@ uv add langchain langchain-openai
 ```
 
 ### 3. 환경변수 설정 ###
+
+랭스미스 API KEY 및 LLM API KEY 를 환경변수로 설정한다.
 ```
 export LANGSMITH_TRACING=true
 export LANGSMITH_ENDPOINT=https://aws.api.smith.langchain.com
