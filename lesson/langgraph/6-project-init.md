@@ -14,6 +14,7 @@ uv init
 ```
 Initialized project `my-langchain-app`
 ```
+uv init 로 생성된 프로젝트 파일을 확인한다. 
 ```
 ls -la
 ```
