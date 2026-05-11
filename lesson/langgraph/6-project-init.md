@@ -6,13 +6,13 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 프로젝트를 생성하고 필요한 파이썬 패키지를 설치한다.
 ```
-mkdir my-langchain-app
-cd my-langchain-app
+mkdir my-agent-app
+cd my-agent-app
 uv init
 ```
 [결과]
 ```
-Initialized project `my-langchain-app`
+Initialized project `my-agent-app`
 ```
 uv init 로 생성된 프로젝트 파일을 확인한다. 
 ```
@@ -38,7 +38,7 @@ uv run python main.py
 
 [결과]
 ```
-Hello from my-langchain-app!
+Hello from my-agent-app!
 ```
 
 ## 레퍼런스 ##
