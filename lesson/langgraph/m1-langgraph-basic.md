@@ -144,3 +144,9 @@ class State(TypedDict):
 
 #### stream vs invoke ####
 두 방식으로 돌려보고 출력이 어떻게 다른지 비교. stream_mode를 "values", "updates", "messages"로 바꾸면서 차이 관찰.
+
+
+## 페러런스 ##
+
+* https://github.com/braincrew-lab/langgraph-v1-tutorial
+
