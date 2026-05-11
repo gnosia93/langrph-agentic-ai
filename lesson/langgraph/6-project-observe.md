@@ -12,7 +12,7 @@
 uv add langchain langchain-openai
 ```
 
-### 3. 환경변수 설치 ###
+### 3. 환경변수 설정 ###
 ```
 export LANGSMITH_TRACING=true
 export LANGSMITH_ENDPOINT=https://aws.api.smith.langchain.com
