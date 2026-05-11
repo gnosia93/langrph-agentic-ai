@@ -1,5 +1,6 @@
+## 프로젝트 생성하기 ##
 
-uv 를 설치한다.
+본 워크샵에서는 uv 를 활용하여 파이썬 프로젝트를 관리한다. 
 ```
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
