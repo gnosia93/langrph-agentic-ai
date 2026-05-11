@@ -30,7 +30,7 @@ drwxr-xr-x@   9 soonbeom  staff   288  5 11 19:50 .git
 -rw-r--r--@   1 soonbeom  staff   162  5 11 19:50 pyproject.toml
 -rw-r--r--@   1 soonbeom  staff     0  5 11 19:50 README.md
 ```
-
+에이전트 개발에 필요한 패키지를 설치한다. 
 ```
 uv add langchain langchain-openai langchain-anthropic langchain-community langgraph python-dotenv
 ```
