@@ -1,6 +1,6 @@
 ## 프로젝트 생성하기 ##
 
-본 워크샵에서는 uv 를 활용하여 파이썬 프로젝트를 관리한다. 
+본 워크샵에서는 uv 를 활용하여 파이썬 프로젝트를 관리한다. uv 는 파이썬 패키지 관리자이다. 
 ```
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
@@ -34,4 +34,5 @@ drwxr-xr-x@   9 soonbeom  staff   288  5 11 19:50 .git
 에이전트 개발에 필요한 패키지를 설치한다. 
 ```
 uv add langchain langchain-openai langchain-anthropic langchain-community langgraph python-dotenv
+uv run python main.py
 ```
