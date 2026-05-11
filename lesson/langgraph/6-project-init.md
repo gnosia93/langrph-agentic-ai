@@ -36,3 +36,8 @@ drwxr-xr-x@   9 soonbeom  staff   288  5 11 19:50 .git
 uv add langchain langchain-openai langchain-anthropic langchain-community langgraph python-dotenv
 uv run python main.py
 ```
+
+[결과]
+```
+Hello from my-langchain-app!
+```
